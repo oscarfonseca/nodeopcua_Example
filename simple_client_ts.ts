@@ -11,8 +11,8 @@ import {
     DataType
 } from "node-opcua";
 
-const endpointUrl = "opc.tcp://opcuademo.sterfive.com:26543";
-const nodeId = "ns=7;s=Scalar_Simulation_Double";
+const endpointUrl = "opc.tcp://172.16.1:4840";
+const nodeId = "ns=4;i=10";
 
 async function main() {
 
@@ -77,14 +77,13 @@ async function main() {
         await subscription.terminate();
 
         const statusCode =await session.write({
-            nodeId: "ns=7;s=Scalar_Static_Double",
+            nodeId: "ns=4;i=10",
             attributeId: AttributeIds.Value,
             value: {
                 statusCode: StatusCodes.Good,
-                sourceTimestamp: new Date(),
                 value: {
-                    dataType: DataType.Double,
-                    value: 25.0
+                    dataType: DataType.Boolean,
+                    value: false
                 }
             }
         });
